@@ -33,9 +33,8 @@ public class HomeController : Controller
 
     public IActionResult Listado()
     {
-        //var remesaLista = _context.DataRemesa.ToList();
-        //return View(remesaLista);
-        return View();
+        var remesaLista = _context.DataRemesa.ToList();
+        return View(remesaLista);
     }
 
     
