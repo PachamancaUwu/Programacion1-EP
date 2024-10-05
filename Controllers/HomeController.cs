@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using examenparcial.Models;
 using examenparcial.Data;
+using examenparcial.Services;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace examenparcial.Controllers;
 
@@ -14,11 +17,13 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly ApplicationDbContext _context;
+    private readonly ApiService _apiService;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+    public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, ApiService apiService)
     {
         _logger = logger;
         _context = context;
+        _apiService = apiService;
     }
 
     public IActionResult Formulario()
@@ -35,7 +40,17 @@ public class HomeController : Controller
 
     
     [HttpPost]
-    public IActionResult Enviar(Remesa objremesa){
+    public async Task<IActionResult> Enviar(Remesa objremesa){
+
+        decimal precioBitcoinUSD = await _apiService.ObtenerPrecioBitcoinUSD();
+        if (objremesa.TipoMoneda == "BTC") { //conversión de bitcoin a dólares
+            objremesa.TasaCambio = precioBitcoinUSD;
+            objremesa.MontoFinal = objremesa.MontoEnviado * objremesa.TasaCambio;
+        } else {                            //conversión de dólares a bitcoins
+            objremesa.TasaCambio = 1 / precioBitcoinUSD;
+            objremesa.MontoFinal = objremesa.MontoEnviado * objremesa.TasaCambio;
+        }
+
         _logger.LogDebug("Ingreso a Enviar Remesa");
         _context.Add(objremesa);
         _context.SaveChanges();
