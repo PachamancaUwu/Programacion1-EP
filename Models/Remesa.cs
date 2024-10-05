@@ -13,12 +13,12 @@ namespace examenparcial.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set;}
-        public string NombreRemitente { get; set; }
-        public string NombreDestinatario { get; set; }
-        public string PaisOrigen { get; set; }
-        public string Destino { get; set; }
-        public Decimal MontoEnviado { get; set; }
-        public string TipoMoneda  { get; set; }
+        public string NombreRemitente { get; set; } //FORM
+        public string NombreDestinatario { get; set; } //FORM
+        public string PaisOrigen { get; set; } //FORM
+        public string Destino { get; set; } //FORM
+        public Decimal MontoEnviado { get; set; } //FORM
+        public string TipoMoneda  { get; set; } //FORM
         public Decimal TasaCambio { get; set; }
         public Decimal MontoFinal { get; set; }
         public string Estado { get; set; } = "PENDIENTE";

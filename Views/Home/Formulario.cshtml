@@ -1,0 +1,55 @@
+﻿@model examenparcial.Models.Remesa
+
+@{
+	ViewData["Title"] = "Formulario";
+}
+
+<div class="container">
+	<h1 class="text-center mb-4">Formulario de Remesa</h1>
+	<div class="row justify-content-center">
+		<div class="col-md-6">
+			<form asp-controller="Home" asp-action="Enviar" method="post">
+				<div class="form-group">
+					<label class="control-label">Nombre del Remitente</label>
+					<input asp-for="NombreRemitente" class="form-control" required>
+				</div>
+				<br>
+				<div class="form-group">
+					<label class="control-label">Nombre del Destinatario</label>
+					<input asp-for="NombreDestinatario" class="form-control" required>
+				</div>
+				<br>
+                <div class="form-group">
+					<label class="control-label">País de Origen</label>
+					<input asp-for="PaisOrigen" class="form-control" required>
+				</div>
+                <br>
+                <div class="form-group">
+					<label class="control-label">País de Destino</label>
+					<input asp-for="Destino" class="form-control" required>
+				</div>
+                <br>
+                <div class="form-group">
+					<label class="control-label">Monto a Enviar</label>
+					<input asp-for="MontoEnviado" class="form-control" type="number" required>
+				</div>
+                <br>
+				<div class="form-group">
+					<label class="control-label">Tipo de Moneda</label>
+					<select asp-for="TipoMoneda" class="form-control">
+						<option value="USD" selected>Dólares Estadounidenses</option>
+						<option value="BTC">Bitcoins</option>
+					</select>
+				</div>
+				<br>
+				<div class="form-group text-center">
+					<button type="submit" class="btn btn-primary">Enviar</button>
+				</div>
+			</form>
+			<h2>@ViewData["Message"]</h2>
+			<div>
+				<a asp-action="Listado">Ver Listado</a>
+			</div>
+		</div>
+	</div>
+</div>
