@@ -1,6 +1,39 @@
-﻿@{
+﻿@model IEnumerable<examenparcial.Models.Remesa>
+
+@{
     ViewData["Title"] = "Listado";
 }
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Vista de Listado no Lista :(</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre del Remitente</th>
+			<th>Nombre del Destinatario</th>
+            <th>País de Origen</th>
+            <th>País de Destino</th>
+            <th>Monto a Enviar</th>
+            <th>Tipo de Moneda</th>
+            <th>Tasa de Cambio</th>
+            <th>Monto Final</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var remesa in Model)
+        {
+            <tr>
+                <td>@remesa.NombreRemitente</td>
+                <td>@remesa.NombreDestinatario</td>
+                <td>@remesa.PaisOrigen</td>
+                <td>@remesa.Destino</td>
+                <td>@remesa.MontoEnviado</td>
+                <td>@remesa.TipoMoneda</td>
+                <td>@remesa.TasaCambio</td>
+                <td>@remesa.MontoFinal</td>
+                <td>@remesa.Estado</td>
+            </tr>
+        }
+    </tbody>
+</table>
